@@ -2,6 +2,7 @@ import unittest
 from src.textnode import TextNode, TextType, text_node_to_html_node
 
 
+
 class TestTextNode(unittest.TestCase):
     def test_eq(self):
         node = TextNode("This is a text node", TextType.TEXT)
@@ -29,6 +30,9 @@ class TestTextNode(unittest.TestCase):
             "TextNode(This is a text node, text, https://www.boot.dev)", repr(node)
         )
 
+
+
+class TestTextnodeToHTMLNode(unittest.TestCase):
     def test_text(self):
         text_to_match = "This is a text node"
         tag_to_match = None
@@ -106,17 +110,18 @@ class TestTextNode(unittest.TestCase):
         html_node = text_node_to_html_node(node)
         # --- TESTS
         self.assertEqual(html_node.tag, tag_to_match)
-        self.assertEqual(html_node.value, text_to_match)
+        self.assertEqual(html_node.value, "")
         html = html_node.to_html()
         self.assertEqual(
             html_node.to_html(), 
-            f'<{tag_to_match} src="{url_to_match}" alt="{text_to_match}">{text_to_match}</{tag_to_match}>'
+            f'<{tag_to_match} src="{url_to_match}" alt="{text_to_match}"></{tag_to_match}>'
             )
-        repr_val = repr(html_node)
         self.assertEqual(
             repr(html_node),
-            f"LeafNode({tag_to_match}, {text_to_match}, {{'src': '{url_to_match}', 'alt': '{text_to_match}'}})"
+            f"LeafNode({tag_to_match}, , {{'src': '{url_to_match}', 'alt': '{text_to_match}'}})"
             )
+
+
 
 if __name__ == "__main__":
     unittest.main()
