@@ -1,6 +1,10 @@
 import unittest
-from src.textnode import TextNode, TextType, text_node_to_html_node
-
+from src.textnode import (
+    TextNode,
+    TextType,
+    text_node_to_html_node,
+    # text_to_textnodes
+)
 
 
 class TestTextNode(unittest.TestCase):
@@ -29,7 +33,6 @@ class TestTextNode(unittest.TestCase):
         self.assertEqual(
             "TextNode(This is a text node, text, https://www.boot.dev)", repr(node)
         )
-
 
 
 class TestTextnodeToHTMLNode(unittest.TestCase):
@@ -77,11 +80,11 @@ class TestTextnodeToHTMLNode(unittest.TestCase):
         self.assertEqual(
             html_node.to_html(),
             f"<{tag_to_match}>{text_to_match}</{tag_to_match}>"
-            )
+        )
         self.assertEqual(
             repr(html_node),
             f"LeafNode({tag_to_match}, {text_to_match}, None)"
-            )
+        )
 
     def test_link(self):
         text_to_match = "This is a link node"
@@ -95,12 +98,12 @@ class TestTextnodeToHTMLNode(unittest.TestCase):
         self.assertEqual(
             html_node.to_html(), 
             f'<{tag_to_match} href="{url_to_match}">{text_to_match}</{tag_to_match}>'
-            )
+        )
         repr_val = repr(html_node)
         self.assertEqual(
             repr(html_node),
             f"LeafNode({tag_to_match}, {text_to_match}, {{'href': '{url_to_match}'}})"
-            )
+        )
 
     def test_image(self):
         text_to_match = "This is an image node"
@@ -115,12 +118,11 @@ class TestTextnodeToHTMLNode(unittest.TestCase):
         self.assertEqual(
             html_node.to_html(), 
             f'<{tag_to_match} src="{url_to_match}" alt="{text_to_match}"></{tag_to_match}>'
-            )
+        )
         self.assertEqual(
             repr(html_node),
             f"LeafNode({tag_to_match}, , {{'src': '{url_to_match}', 'alt': '{text_to_match}'}})"
-            )
-
+        )
 
 
 if __name__ == "__main__":
