@@ -12,7 +12,6 @@ def main():
 
     print("Copying static files to public directory...")
     copy_files_recursive(dir_path_static, dir_path_public)
-
     
 
 if __name__ == "__main__":
