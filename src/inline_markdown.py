@@ -85,3 +85,11 @@ def text_to_textnodes(text):
    new_nodes = split_nodes_link(new_nodes)
    new_nodes = split_nodes_image(new_nodes)
    return new_nodes
+
+def extract_title(markdown):
+    first_line = markdown.split("\n")[0]
+    if not first_line.startswith("# "):
+        raise ValueError("missing title string")
+    title = first_line[1:]
+    title = title.strip()
+    return title
